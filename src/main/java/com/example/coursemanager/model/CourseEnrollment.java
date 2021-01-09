@@ -10,6 +10,8 @@ import java.time.LocalDate;
 @Entity
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class CourseEnrollment {
 
     @Id
