@@ -16,7 +16,7 @@ import java.util.List;
 public class LessonBlock {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String subject;
     @OneToMany
