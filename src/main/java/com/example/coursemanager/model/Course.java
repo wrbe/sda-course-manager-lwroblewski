@@ -23,4 +23,8 @@ public class Course {
     @JoinColumn(name = "course_id")
     private List<LessonBlock> lessonBlocks;
 
+    public Course(String name, List<LessonBlock> lessonBlocks) {
+        this.name = name;
+        this.lessonBlocks = lessonBlocks;
+    }
 }

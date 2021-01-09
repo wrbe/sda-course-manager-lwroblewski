@@ -23,4 +23,9 @@ public class CourseEnrollment {
     @ManyToOne
     private Course course;
 
+    public CourseEnrollment(LocalDate date, User participant, Course course) {
+        this.date = date;
+        this.participant = participant;
+        this.course = course;
+    }
 }

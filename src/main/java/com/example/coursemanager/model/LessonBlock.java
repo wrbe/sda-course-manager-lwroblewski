@@ -25,4 +25,9 @@ public class LessonBlock {
     @ManyToOne
     private User teacher;
 
+    public LessonBlock(String subject, List<Lesson> lessons, User teacher) {
+        this.subject = subject;
+        this.lessons = lessons;
+        this.teacher = teacher;
+    }
 }

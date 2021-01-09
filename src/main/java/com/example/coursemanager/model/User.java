@@ -25,5 +25,12 @@ public class User {
     private String lastName;
     private boolean active;
 
-
+    public User(String login, String pass, Role type, String firstName, String lastName, boolean active) {
+        this.login = login;
+        this.pass = pass;
+        this.type = type;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.active = active;
+    }
 }

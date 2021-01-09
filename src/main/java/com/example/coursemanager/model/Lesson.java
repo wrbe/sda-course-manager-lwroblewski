@@ -22,4 +22,9 @@ public class Lesson {
     private long id;
     private String subject;
     private LocalDate date;
+
+    public Lesson(String subject, LocalDate date) {
+        this.subject = subject;
+        this.date = date;
+    }
 }
