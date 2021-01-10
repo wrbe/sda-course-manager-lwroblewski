@@ -1,7 +1,7 @@
-package com.example.coursemanager.controller;
+package com.example.coursemanager.lesson.controller;
 
-import com.example.coursemanager.model.LessonBlock;
-import com.example.coursemanager.repository.LessonBlockRepository;
+import com.example.coursemanager.lesson.model.LessonBlock;
+import com.example.coursemanager.lesson.LessonBlockRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;

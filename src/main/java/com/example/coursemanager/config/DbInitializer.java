@@ -1,7 +1,16 @@
 package com.example.coursemanager.config;
 
-import com.example.coursemanager.model.*;
-import com.example.coursemanager.repository.*;
+import com.example.coursemanager.course.model.Course;
+import com.example.coursemanager.course.model.CourseEnrollment;
+import com.example.coursemanager.course.CourseEnrollmentRepository;
+import com.example.coursemanager.course.CourseRepository;
+import com.example.coursemanager.lesson.model.Lesson;
+import com.example.coursemanager.lesson.model.LessonBlock;
+import com.example.coursemanager.lesson.LessonBlockRepository;
+import com.example.coursemanager.lesson.LessonRepository;
+import com.example.coursemanager.user.model.Role;
+import com.example.coursemanager.user.model.User;
+import com.example.coursemanager.user.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;

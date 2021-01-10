@@ -1,7 +1,6 @@
-package com.example.coursemanager.repository;
+package com.example.coursemanager.lesson;
 
-import com.example.coursemanager.model.Lesson;
-import com.example.coursemanager.model.LessonBlock;
+import com.example.coursemanager.lesson.model.LessonBlock;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface LessonBlockRepository extends JpaRepository<LessonBlock, Long> {

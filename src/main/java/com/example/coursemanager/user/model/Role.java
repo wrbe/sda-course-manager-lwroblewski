@@ -1,4 +1,4 @@
-package com.example.coursemanager.model;
+package com.example.coursemanager.user.model;
 
 
 public enum Role {

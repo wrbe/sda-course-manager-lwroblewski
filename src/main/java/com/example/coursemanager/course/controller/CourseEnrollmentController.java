@@ -1,4 +1,4 @@
-package com.example.coursemanager.controller;
+package com.example.coursemanager.course.controller;
 
 import org.springframework.web.bind.annotation.RestController;
 
