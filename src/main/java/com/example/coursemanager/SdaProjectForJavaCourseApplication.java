@@ -10,4 +10,5 @@ public class SdaProjectForJavaCourseApplication {
 		SpringApplication.run(SdaProjectForJavaCourseApplication.class, args);
 	}
 
+
 }

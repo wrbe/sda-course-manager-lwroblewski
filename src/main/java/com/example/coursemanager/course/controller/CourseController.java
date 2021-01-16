@@ -1,6 +1,9 @@
 package com.example.coursemanager.course.controller;
 
+import com.example.coursemanager.course.dto.CourseDetailsDto;
+import com.example.coursemanager.course.dto.CourseDtoMapper;
 import com.example.coursemanager.course.CourseRepository;
+import com.example.coursemanager.course.dto.CourseDto;
 import com.example.coursemanager.course.model.Course;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,6 +25,9 @@ public class CourseController {
     }
 
     @GetMapping("/courses/{id}")
-    public Course getCourseById(@PathVariable Long id) { return courseRepository.findById(id).get(); }
+    public CourseDto getCourseById(@PathVariable Long id) { return CourseDtoMapper.mapCourseToDto(courseRepository.findById(id).get()); }
+
+    @GetMapping("/courses/info/{id}")
+    public CourseDetailsDto getCourseDetailById(@PathVariable Long id) { return CourseDtoMapper.mapCourseToDetailDto(courseRepository.findById(id).get()); }
 
 }

@@ -18,6 +18,8 @@ import org.springframework.stereotype.Component;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 @Component
 @AllArgsConstructor
@@ -33,9 +35,32 @@ public class DbInitializer implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
-        initDb();
+//        flushDatabase();
+//          initDb();
 
-    }
+        if ((lessonRepository.count() == 0) &
+                (lessonBlockRepository.count() == 0) &
+                (courseRepository.count() == 0) &
+                (courseEnrollmentRepository.count() == 0) &
+                (userRepository.count() == 0)) {
+
+        initUser("admin", "admin", Role.ADMIN, "Admin", "Administrator");
+        initUser("user", "user", Role.PARTICIPANT, "Participant", "unknown");
+        initUser("teacher", "teacher", Role.TEACHER, "Teacher", "unknown");
+
+        initCourse("Java", "PL");
+        initCourse("Java", "EN");
+        initCourse("Phyton", "PL");
+        initCourse("PHP", "PL");
+
+//        initLesson("Spring", 40);
+//        initLesson("MySql", 20);
+//        initLesson("Testing", 10);
+//
+//        initBlocks("Advanced");
+//        initBlocks("Database");
+//        initBlocks("Testing");
+    } }
 
     // metoda sprawdzajaca czy jakies dane sa w bazie danych aby uniknac duplikowania rekordow
 
@@ -46,9 +71,9 @@ public class DbInitializer implements CommandLineRunner {
             (courseEnrollmentRepository.count() == 0) &
             (userRepository.count() == 0)) {
 
-            User user1 = new User("login1", "pass1", Role.ADMIN, "Jan", "Kowalski", true);
-            User user2 = new User("login2", "pass2", Role.TEACHER, "Zbigniew", "Moczymaka", true);
-            User user3 = new User("login3", "pass3", Role.PARTICIPANT, "Sandra", "Kowalska", true);
+            User user1 = new User("login1", "pass1", Role.ADMIN, "Jan", "Kowalski");
+            User user2 = new User("login2", "pass2", Role.TEACHER, "Zbigniew", "Moczymaka");
+            User user3 = new User("login3", "pass3", Role.PARTICIPANT, "Sandra", "Kowalska");
 
             userRepository.save(user1);
             userRepository.save(user2);
@@ -104,6 +129,7 @@ public class DbInitializer implements CommandLineRunner {
             javaLessonsBlockList.add(java_advanced);
 
             Course java = new Course("Java from scratch", javaLessonsBlockList);
+            Course phyton = new Course("Phyton from scratch", javaLessonsBlockList);
 
             courseRepository.save(java);
 
@@ -112,5 +138,67 @@ public class DbInitializer implements CommandLineRunner {
             courseEnrollmentRepository.save(javaEnrollment);
         }
     }
+
+    private List<Lesson> initLesson(String name, int count) {
+        return IntStream.range(0, count).mapToObj(i -> {
+            Lesson lesson = new Lesson(name + " #" + i, LocalDate.now().minusDays(31 - i));
+            lessonRepository.save(lesson);
+            return lesson;
+        }).collect(Collectors.toList());
+    }
+
+//    private List<Lesson> initLessons(String subject, int count) {
+//        return IntStream.range(0, count).mapToObj(i -> {
+//            Lesson lesson = new Lesson();
+//            lesson.setSubject(subject + " " + i);
+//            lesson.setDate(LocalDate.now().minusDays(31 - i));
+//            lessonRepository.save(lesson);
+//            return lesson;
+//        }).collect(Collectors.toList());
+//    }
+
+    private User initUser(String login, String pass, Role type, String firstName, String lastName) {
+        User user = new User(login, pass, type, firstName, lastName);
+        user.setActive(true);
+        userRepository.save(user);
+        return user;
+    }
+    private Course initCourse(String name, String coursePrefix) {
+        Course course = new Course();
+        course.setName(name);
+        course.setLessonBlocks(initBlocks(coursePrefix));
+        courseRepository.save(course);
+        return course;
+    }
+
+    private List<LessonBlock> initBlocks(String coursePrefix) {
+        LessonBlock block_test = new LessonBlock();
+        LessonBlock block_db = new LessonBlock();
+        LessonBlock block_java = new LessonBlock();
+
+        block_java.setSubject(coursePrefix + " java");
+        block_java.setLessons(initLesson("java", 20));
+        lessonBlockRepository.save(block_java);
+
+        block_db.setSubject(coursePrefix + " db");
+        block_db.setLessons(initLesson("db", 6));
+        lessonBlockRepository.save(block_db);
+
+        block_test.setSubject(coursePrefix + " test");
+        block_test.setLessons(initLesson("test", 4));
+        lessonBlockRepository.save(block_test);
+
+        return List.of(block_java, block_db, block_test);
+    }
+
+    private void flushDatabase() {
+        courseEnrollmentRepository.deleteAll();
+        courseRepository.deleteAll();
+        lessonBlockRepository.deleteAll();
+        lessonRepository.deleteAll();
+        userRepository.deleteAll();
+    }
+
+
 }
 
