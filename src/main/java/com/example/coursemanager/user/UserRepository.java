@@ -1,4 +1,4 @@
-package com.example.coursemanager.repository;
+package com.example.coursemanager.user;
 
 import com.example.coursemanager.user.model.Role;
 import com.example.coursemanager.user.model.User;
