@@ -11,7 +11,7 @@ export class UserService {
   public usersUrl: string;
 
   constructor(private httpClient: HttpClient) {
-    this.usersUrl = 'http://localhost:8080/users';
+    this.usersUrl = 'http://localhost:8080/api/users';
   }
 
   public getUserList(): Observable<User[]> {
