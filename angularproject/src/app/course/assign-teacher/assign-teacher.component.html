@@ -1,0 +1,9 @@
+<p>Assign - teacher:</p>
+
+<form (ngSubmit)="onSubmit()">
+  <label for="teacherId">Teacher ID: ({{teacherId}}</label>
+  <input id="teacherId" name="teacherId" type="number" [(ngModel)]="teacherId">
+  <p>Lesson Block ID: {{lessonBlockId}}</p>
+  <button type="submit">Assign</button>
+</form>
+

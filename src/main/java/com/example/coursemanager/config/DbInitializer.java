@@ -48,6 +48,13 @@ public class DbInitializer implements CommandLineRunner {
         initUser("user", "user", Role.PARTICIPANT, "Participant", "unknown");
         initUser("teacher", "teacher", Role.TEACHER, "Teacher", "unknown");
 
+        IntStream.range(0, 5).forEach(i -> {
+            initUser("participant-" + i, "pass", Role.PARTICIPANT, "Name-" + i, "Lastname-" + i);
+            initUser("teacher-" + i, "pass", Role.TEACHER, "Name-" + i, "Lastname-" + i);
+            initUser("admin-" + i, "admin", Role.ADMIN, "Name-" + i, "Lastname-" + i);
+        });
+            initCourse("testing for dummies", "PL");
+
         initCourse("Java", "PL");
         initCourse("Java", "EN");
         initCourse("Phyton", "PL");

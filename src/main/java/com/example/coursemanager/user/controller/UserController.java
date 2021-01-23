@@ -3,6 +3,7 @@ package com.example.coursemanager.user.controller;
 import com.example.coursemanager.user.UserRepository;
 import com.example.coursemanager.user.dto.UserDto;
 import com.example.coursemanager.user.dto.UserDtoMapper;
+import com.example.coursemanager.user.model.Role;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,6 +20,12 @@ public class UserController {
     @GetMapping("/users")
     public List<UserDto> getUsersList() {
         return UserDtoMapper.mapToUserDtos(userRepository.findAll());
+    }
+
+    @GetMapping(value = "/users", params = "type")
+    public List<UserDto> getUserByType(@RequestParam("type") String type) {
+        Role role = Role.valueOf(type);
+        return UserDtoMapper.mapToUserDtos(userRepository.findByType(role));
     }
 
     @GetMapping("/users/{id}")
